@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<!-- Countdown -->
+
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>考研倒计时</title>
+        <style>
+            h1 {
+                text-align: center;
+                color:#1E90FF;
+                margin-bottom: 100px;
+                position: relative;
+                background-color: white;
+            }
+
+            body {
+                background-image: url('images/xiaogou.png');
+                background-size: cover;
+                background-position: 50% 30%;
+                min-height: 100vh;
+            }
+
+            #days {
+                position: relative;
+            }
+
+            #ju {
+                max-height: 70px;
+                width: auto;
+                position: absolute;
+                bottom: 90px;
+                left: 6px;
+            }
+
+            #seconds
+            {
+                position: relative;
+            }
+
+            #meng {
+                max-height: 70px;
+                width: auto;
+                position: absolute;
+                bottom: 90px;
+                right: 6px;
+                z-index: 5;
+            }
+
+            #container {
+                display: flex;
+                justify-content: center;
+            }
+
+            #container > div {
+                background-color: CornflowerBlue;
+                font-size: 2.5em;
+                border: 5px solid white;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 5px;
+                min-width: 52.8px;
+                font-family: Verdana, Arial, Sans-serif;
+                text-align: center;
+            }
+
+            #container > span {
+                position: relative;
+                top: 70px;
+                font-weight: bold;
+            }
+
+            p {
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>考研倒计时</h1>
+
+        <div id="container">
+            <div id="days">00
+                <div>
+                    <img id="ju"src="images/ju.png" alt="这是一只小鸡毛">
+                </div>
+            </div>
+            <span>天</span>
+            <div id="hours">00</div>
+            <span>时</span>
+            <div id="minutes">00</div>
+            <span>分</span>
+            <div id="seconds">00
+                <div>
+                    <img id="meng" src="images/meng.png" alt="这是一只小白">
+                </div>
+            </div>
+            <span>秒</span>
+        </div>
+
+        <p id="quote"></p>
+
+        <script>
+            function quote() {
+                fetch('https://v1.hitokoto.cn')
+                    .then(response => response.json())
+                    .then(data => {
+                        const quote = document.getElementById("quote");
+                        quote.innerHTML = data.hitokoto;
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                        document.getElementById("quote").innerHTML = '出错啦>_<';
+                    });
+            }
+
+            function update()
+            {
+                // 考研日期
+                const d = new Date("2024-12-21T00:00:00");
+
+                // 当前时间
+                const now = new Date();
+
+                // 时间差
+                const time = d - now;
+                const countdown = new Object();
+
+                countdown.days = Math.trunc(time / (1000 * 60 * 60 * 24));
+                countdown.hours = Math.trunc((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                countdown.minutes = Math.trunc((time % (1000 * 60 * 60)) / (1000 * 60));
+                countdown.seconds = Math.trunc((time % (1000 * 60)) / 1000);
+
+                // 更新方块里的时间
+                for (let i in countdown) {
+                    document.getElementById(i).firstChild.textContent = String(countdown[i]).padStart(2, "0");
+                }
+            }
+
+            // 每秒更新
+            update();
+            window.setInterval(update, 1000);
+
+            window.onload = function() {
+                quote();
+            };
+        </script>
+    </body>
+</html>
