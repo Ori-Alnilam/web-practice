@@ -18,6 +18,11 @@
 - Make changes in the remote repository
 - Pull the most recent changes down from Github
 - `git pull`
+
+**When there are some changes on the remote repository, we cannot `push` before `pull`.**
+
+-`git log` <!-- 提交日志 -->
+
 # Other commands
 - Open hello.html in browser
 - `open hello.html`
