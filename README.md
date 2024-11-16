@@ -1,4 +1,4 @@
-# Some git command practice
+# Some Git commands
 - Clone repository
 - `git clone`
 - `cd hello`
@@ -18,6 +18,6 @@
 - Make changes in the remote repository
 - Pull the most recent changes down from Github
 - `git pull`
-# Other command 
+# Other commands
 - Open hello.html in browser
 - `open hello.html`
