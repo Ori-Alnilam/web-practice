@@ -23,6 +23,7 @@
 - After Fixing conflicts in text editor, `commit` and `push`
 - `git commit -am "Fix conflicts"`
 - `git push`
+- 提交日志
 - `git log`
 
 # Other commands
