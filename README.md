@@ -24,7 +24,7 @@
 - `git commit -am "Fix conflicts"`
 - `git push`
 - 提交日志
-- `git log`
+- `git log` 键入`q`退出分页器
 
 # Other commands
 - ~~Open hello.html in browser~~ update: Only in macOS
