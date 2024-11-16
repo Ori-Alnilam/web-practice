@@ -18,10 +18,12 @@
 - Make changes in the remote repository
 - Pull the most recent changes down from Github
 - `git pull`
-
-**When there are some changes on the remote repository, we cannot `push` before `pull`.**
-
--`git log` <!-- 提交日志 -->
+- **When there are some changes on the remote repository, we cannot `push` before `pull`.**
+- Merge conflict
+- After Fixing conflicts in text editor, `commit` and `push`
+- `git commit -am "Fix conflicts"`
+- `git push`
+- `git log`
 
 # Other commands
 - Open hello.html in browser
