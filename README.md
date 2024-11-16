@@ -28,4 +28,4 @@
 
 # Other commands
 - ~~Open hello.html in browser~~ update: Only in macOS
-- `open hello.html`
+- ~~`open hello.html`~~
