@@ -25,6 +25,10 @@
 - `git push`
 - 提交日志
 - `git log` 键入`q`退出分页器
+- 本地回到某个旧版本 by commit hash
+- `git reset --hard <commit hash>`
+- 返回远程最新版本
+- `git reset --hard origin/main`
 
 # Other commands
 - ~~Open hello.html in browser~~ update: Only in macOS
