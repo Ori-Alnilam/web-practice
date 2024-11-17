@@ -97,18 +97,33 @@
         </div>
 
         <p id="quote"></p>
+        <p id="fallback"></p>
 
         <script>
             function quote() {
                 fetch('https://v1.hitokoto.cn')
                     .then(response => response.json())
                     .then(data => {
-                        const quote = document.getElementById("quote");
+                        const quote = document.getElementById('quote');
                         quote.innerHTML = data.hitokoto;
                     })
                     .catch(error => {
                         console.log('Error:', error);
-                        document.getElementById("quote").innerHTML = '出错啦>_<';
+                        document.getElementById('quote').innerHTML = ':)';
+                        fallback();
+                    });
+            }
+
+            function fallback() {
+                fetch('https://api.xygeng.cn/one')
+                    .then(response => response.json())
+                    .then(data => {
+                        const fallback = document.getElementById('fallback');
+                        fallback.innerHTML = data.data.content;
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                        document.getElementById('fallback').innerHTML = '出错啦>_<';
                     });
             }
 
