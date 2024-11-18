@@ -82,7 +82,7 @@
         <h1>考研倒计时</h1>
 
         <div id="container">
-            <div id="days">00
+            <div><span id="days">00</span>
                 <img id="ju"src="images/ju.png" alt="这是一只小鸡毛">
             </div>
             <span>天</span>
@@ -137,7 +137,7 @@
 
                 // 时间差
                 const time = d - now;
-                const countdown = new Object();
+                const countdown = {};
 
                 countdown.days = Math.trunc(time / (1000 * 60 * 60 * 24));
                 countdown.hours = Math.trunc((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
