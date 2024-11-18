@@ -100,6 +100,7 @@
         <p id="fallback"></p>
 
         <script>
+            // 名言API
             function quote() {
                 fetch('https://v1.hitokoto.cn')
                     .then(response => response.json())
@@ -127,6 +128,7 @@
                     });
             }
 
+            // 更新倒计时
             function update()
             {
                 // 考研日期
