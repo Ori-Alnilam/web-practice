@@ -23,7 +23,7 @@
                 min-height: 100vh;
             }
 
-            #days {
+            #ju_ancestor {
                 position: relative;
             }
 
@@ -35,8 +35,7 @@
                 left: 6px;
             }
 
-            #seconds
-            {
+            #meng_ancestor {
                 position: relative;
             }
 
@@ -82,7 +81,8 @@
         <h1>考研倒计时</h1>
 
         <div id="container">
-            <div><span id="days">00</span>
+            <div id="ju_ancestor">
+                <span id="days">00</span>
                 <img id="ju"src="images/ju.png" alt="这是一只小鸡毛">
             </div>
             <span>天</span>
@@ -90,7 +90,8 @@
             <span>时</span>
             <div id="minutes">00</div>
             <span>分</span>
-            <div id="seconds">00
+            <div id="meng_ancestor">
+                <span id="seconds">00</span>
                 <img id="meng" src="images/meng.png" alt="这是一只小白">
             </div>
             <span>秒</span>
@@ -148,7 +149,7 @@
 
                 // 更新方块里的时间
                 for (let i in countdown) {
-                    document.getElementById(i).firstChild.textContent = String(countdown[i]).padStart(2, "0");
+                    document.getElementById(i).innerHTML = String(countdown[i]).padStart(2, "0");
                 }
             }
 
