@@ -116,6 +116,7 @@
                     });
             }
 
+            // 备用API
             function fallback() {
                 fetch('https://api.xygeng.cn/one')
                     .then(response => response.json())
@@ -133,13 +134,25 @@
             function update()
             {
                 // 考研日期
-                const d = new Date("2024-12-21T00:00:00");
+                const currentYear = new Date().getFullYear();
+                const examDate = new Date(`${currentYear}-12-21T00:00:00`);
 
                 // 当前时间
                 const now = new Date();
 
+                // 考研那两天
+                if (now > examDate && now <= new Date(`${currentYear}-12-22T23:59:59`)) {
+                    document.getElementById("quote").innerHTML = '考研进行中......';
+                    return;
+                }
+
+                // 如果当前时间为考试后，更新为下一年考研倒计时
+                if (now > examDate) {
+                    examDate.setFullYear(currentYear + 1);
+                }
+
                 // 时间差
-                const time = d - now;
+                const time = examDate - now;
                 const countdown = {};
 
                 countdown.days = Math.trunc(time / (1000 * 60 * 60 * 24));
