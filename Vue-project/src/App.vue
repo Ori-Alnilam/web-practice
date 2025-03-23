@@ -1,67 +1,53 @@
 <script setup>
-import { ref, reactive } from "vue";
+  import { computed, ref } from "vue";
 
-const msg = ref("Vue");
-const num = ref(0);
-const newTodo = ref({});
+  let id = 0
+  const todos = ref([
+    { id: id++, text: "Learn HTML", done: true },
+    { id: id++, text: "Learn JavaScript", done: true },
+    { id: id++, text: "Learn Vue", done: false }
+  ])
 
-const todoList = reactive([
-  { name: "kiss", done: false },
-  { name: "hug", done: false },
-  { name: "sex", done: false },
-]);
+  const newTodo = ref("")
+  const addTodo = () => {
+    todos.value.push({ id: id++, text: newTodo.value, done: false })
+    newTodo.value = ""
+  }
 
-function increment() {
-  num.value++;
-}
+  const removeTodo = (todo) => {
+    todos.value = todos.value.filter((e) => e !== todo)
+  }
 
-function decrement() {
-  num.value--;
-}
+  const hideCompleted = ref(false)
+  const filteredTodos = computed(() => {
+    return hideCompleted.value
+    ? todos.value.filter((e) => !e.done)
+    : todos.value
+  })
 
-const add = () => {
-  todoList.push({ name: newTodo.value, done: false });
-  newTodo.value = "";
-};
-
-const complete = (todo) => {
-  todo.done = true;
-};
-
-const remove = (todo) => {
-  const index = todoList.indexOf(todo);
-  todoList.splice(index, 1);
-};
 </script>
 
 <template>
-  <div>
-    Hello, {{ msg }}
-    <button @click="increment">加一</button>
-    <button @click="decrement">减一</button>
-    <div>{{ num }}</div>
-  </div>
-
-  <div>
-    <div>待办事项清单：</div>
-
-    <input v-model="newTodo" placeholder="edit" />
-    <button type="submit" @click="add">Add</button>
-    <ul v-if="todoList.length > 0">
-      <li v-for="(todo, index) in todoList">
-        <span :class="{ 'delete-decoration': todo.done }"
-          >{{ index }}. {{ todo.name }}</span>
-        <span v-if="!todo.done">{{ index }}. {{ todo.name }}</span>
-        <del v-if="todo.done">{{ index }}. {{ todo.name }}</del>
-        <button @click="complete(todo)">complete</button>
-        <button @click="remove(todo)">remove</button>
-      </li>
-    </ul>
-  </div>
+  <form @submit.prevent="addTodo">
+    <input v-model="newTodo" required placeholder="new Todo">
+    <button>Add Todo</button>
+  </form>
+  <ul>
+    <li v-for="(todo, index) in filteredTodos" :key="todo.id">
+      <input type="checkbox" v-model="todo.done">
+      <span :class="{done: todo.done}">Step {{ index + 1 }} : {{ todo.text }}</span>
+      <button @click="removeTodo(todo)">X</button>
+    </li>
+  </ul>
+  
+  <!-- 练习计算属性 -->
+  <button @click="hideCompleted = !hideCompleted">
+    {{ hideCompleted ? "Show all" : "Hide completed" }}
+  </button>
 </template>
 
 <style scoped>
-.delete-decoration {
-  text-decoration: line-through;
-}
+  .done {
+    text-decoration: line-through;
+  }
 </style>
